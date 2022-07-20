@@ -7,6 +7,7 @@ import {
   checkAlternativeFonts,
   checkSemanticTags,
   checkLang,
+  checkResetMargins,
   checkLayout,
 } from './lib.js';
 import initPuppeteer from './puppeteer.js';
@@ -25,8 +26,9 @@ const runTests = async (projectPath, lang) => {
     checkCSS(projectPath),
     checkOrderStylesheetLinks(page),
     checkAlternativeFonts(path.join(projectPath, 'styles', 'style.css'), ['Inter', 'EB Garamond']),
-    checkSemanticTags(page),
+    checkSemanticTags(page, ['header', 'main', 'section', 'footer']),
     checkLang(page, lang),
+    checkResetMargins(page, ['body']),
     checkLayout(page),
   ])).flat();
 

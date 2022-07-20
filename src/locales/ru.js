@@ -20,5 +20,6 @@ export default {
     semanticTagsMissing: 'Отсутствуют семантические теги: `{{ tagNames }}`.',
     langAttrMissing: 'Укажите язык для страницы. Добавьте для тега `html` аттрибут `lang` со значением `{{ lang }}`',
     orderStylesheetLinks: 'Неправильный порядок подключения стилей: сначала шрифты, потом собственные стили.',
+    notResetMargins: 'Сбросьте браузерные отступы у элементов: {{ tagNames }}.',
   },
 };

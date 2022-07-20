@@ -136,8 +136,7 @@ const checkAlternativeFonts = (cssPath, fonts) => {
   return errors;
 };
 
-const checkSemanticTags = async (page) => {
-  const tags = ['header', 'main', 'section', 'footer'];
+const checkSemanticTags = async (page, tags) => {
   const tagsAfterSearch = await Promise.all(tags.map(async (tagName) => {
     const isFound = await hasElementBySelectors(page, tagName);
 
@@ -169,6 +168,33 @@ const checkLang = async (page, lang) => {
       id: 'langAttrMissing',
       values: {
         lang,
+      },
+    }];
+  }
+
+  return [];
+};
+
+const checkResetMargins = async (page, tags) => {
+  const properties = ['margin', 'padding'];
+
+  const elementsProperties = await Promise.all(tags.map(async (tagName) => {
+    const elementProperties = await getStyle(page, tagName, properties);
+
+    return {
+      tagName,
+      isNotReset: elementProperties.some((property) => property !== '0px'),
+    };
+  }));
+
+  const notResetTags = elementsProperties.filter(({ isNotReset }) => isNotReset);
+  const notResetTagNames = notResetTags.map(({ tagName }) => tagName);
+
+  if (notResetTagNames.length) {
+    return [{
+      id: 'notResetMargins',
+      values: {
+        tagNames: notResetTagNames.join(', '),
       },
     }];
   }
@@ -225,5 +251,6 @@ export {
   checkAlternativeFonts,
   checkSemanticTags,
   checkLang,
+  checkResetMargins,
   checkLayout,
 };

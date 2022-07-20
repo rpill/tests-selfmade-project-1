@@ -18,6 +18,19 @@ const hasElementBySelectors = async (page, selectors) => {
   return result;
 };
 
+const getStyle = async (page, selectors, properties) => {
+  const result = await page.evaluate((slctrs, props) => {
+    const element = document.querySelector(slctrs);
+
+    return props.map((property) => (
+      window.getComputedStyle(element).getPropertyValue(property)
+    ));
+  }, selectors, properties);
+
+  return result;
+};
+
 export {
   hasElementBySelectors,
+  getStyle,
 };
