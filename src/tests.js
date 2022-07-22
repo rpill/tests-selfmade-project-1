@@ -7,6 +7,7 @@ import {
   checkAlternativeFonts,
   checkSemanticTags,
   checkLang,
+  checkTitleEmmet,
   checkResetMargins,
   checkLayout,
 } from './lib.js';
@@ -28,6 +29,7 @@ const runTests = async (projectPath, lang) => {
     checkAlternativeFonts(path.join(projectPath, 'styles', 'style.css'), ['Inter', 'EB Garamond']),
     checkSemanticTags(page, ['header', 'main', 'section', 'footer']),
     checkLang(page, lang),
+    checkTitleEmmet(page),
     checkResetMargins(page, ['body']),
     checkLayout(page),
   ])).flat();

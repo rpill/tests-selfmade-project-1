@@ -13,7 +13,11 @@ import * as csstree from 'css-tree';
 import compareImages from 'resemblejs/compareImages.js';
 import imgbbUploader from 'imgbb-uploader';
 import { getFileData } from './utils.js';
-import { hasElementBySelectors } from './puppeteer.js';
+import { 
+  hasElementBySelectors,
+  getElement,
+  getStyle,
+} from './puppeteer.js';
 import stylelintConfig from './config/stylelint.config.js';
 
 const checkStructure = (projectPath) => {
@@ -175,6 +179,19 @@ const checkLang = async (page, lang) => {
   return [];
 };
 
+const checkTitleEmmet = async (page) => {
+  const text = 'Document';
+  const title = await page.evaluate(() => document.title);
+
+  if(title === text) {
+    return [{
+      id: 'titleEmmet',
+    }];
+  }
+
+  return [];
+}
+
 const checkResetMargins = async (page, tags) => {
   const properties = ['margin', 'padding'];
 
@@ -251,6 +268,7 @@ export {
   checkAlternativeFonts,
   checkSemanticTags,
   checkLang,
+  checkTitleEmmet,
   checkResetMargins,
   checkLayout,
 };

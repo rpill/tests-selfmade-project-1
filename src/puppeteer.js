@@ -18,6 +18,14 @@ const hasElementBySelectors = async (page, selectors) => {
   return result;
 };
 
+const getElement = async (page, selectors) => {
+  const result = await page.evaluate((slctrs) => (
+    document.querySelector(slctrs)
+  ), selectors);
+
+  return result;
+};
+
 const getStyle = async (page, selectors, properties) => {
   const result = await page.evaluate((slctrs, props) => {
     const element = document.querySelector(slctrs);
@@ -32,5 +40,6 @@ const getStyle = async (page, selectors, properties) => {
 
 export {
   hasElementBySelectors,
+  getElement,
   getStyle,
 };
