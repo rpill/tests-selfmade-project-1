@@ -13,9 +13,8 @@ import * as csstree from 'css-tree';
 import compareImages from 'resemblejs/compareImages.js';
 import imgbbUploader from 'imgbb-uploader';
 import { getFileData } from './utils.js';
-import { 
+import {
   hasElementBySelectors,
-  getElement,
   getStyle,
 } from './puppeteer.js';
 import stylelintConfig from './config/stylelint.config.js';
@@ -183,14 +182,14 @@ const checkTitleEmmet = async (page) => {
   const text = 'Document';
   const title = await page.evaluate(() => document.title);
 
-  if(title === text) {
+  if (title === text) {
     return [{
       id: 'titleEmmet',
     }];
   }
 
   return [];
-}
+};
 
 const checkResetMargins = async (page, tags) => {
   const properties = ['margin', 'padding'];
