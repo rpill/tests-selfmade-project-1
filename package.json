@@ -22,7 +22,6 @@
     "dotenv": "^16.0.1",
     "file-url": "^4.0.0",
     "i18next": "^21.8.14",
-    "imgbb-uploader": "^1.5.0",
     "puppeteer": "^15.4.0",
     "resemblejs": "^4.1.0",
     "stylelint": "^14.9.1",

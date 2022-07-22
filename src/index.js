@@ -1,7 +1,7 @@
 import i18next from 'i18next';
+import fs from 'fs';
 import ru from './locales/ru.js';
 import runTests from './tests.js';
-import render from './render.js';
 
 const [,, PROJECT_PATH, LANG = 'ru'] = process.argv;
 
@@ -15,9 +15,10 @@ const app = async (projectPath, lang) => {
 
   try {
     const errors = await runTests(projectPath, lang);
+
     if (errors.length) {
-      render(errors);
-      process.exit(1);
+      const errorsText = errors.map((error, index) => `${index + 1}. ${i18next.t(error.id, error.values)}`).join('\r\n');
+      fs.writeFileSync('./result.txt', errorsText);
     }
   } catch (error) {
     console.log(error);

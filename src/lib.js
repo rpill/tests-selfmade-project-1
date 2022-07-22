@@ -239,20 +239,11 @@ const checkLayout = async (page) => {
   };
 
   const data = await compareImages(fs.readFileSync('./layout-canonical.jpg'), fs.readFileSync('./layout.jpg'), options);
+  fs.writeFileSync('./output.jpg', data.getBuffer(true));
 
   if (data.misMatchPercentage > 10) {
-    fs.writeFileSync('./output.jpg', data.getBuffer(true));
-
-    const response = await imgbbUploader({
-      apiKey: process.env.IMGBB_API_KEY,
-      imagePath: './output.jpg',
-    });
-
     return [{
-      id: 'layout',
-      values: {
-        url: response.url,
-      },
+      id: 'layoutDifferent',
     }];
   }
 
