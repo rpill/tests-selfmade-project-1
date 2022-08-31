@@ -25,7 +25,7 @@ const runTests = async (projectPath, lang) => {
   const errors = (await Promise.all([
     checkW3C(path.join(projectPath, 'index.html')),
     checkCSS(projectPath),
-    checkOrderStylesheetLinks(page),
+    checkOrderStylesheetLinks(page, ['fonts.css', 'style.css']),
     checkAlternativeFonts(path.join(projectPath, 'styles', 'style.css'), ['Inter', 'EB Garamond']),
     checkSemanticTags(page, ['header', 'main', 'section', 'footer']),
     checkLang(page, lang),

@@ -104,8 +104,9 @@ const checkCSS = async (cssPath) => {
   return errors;
 };
 
-const checkOrderStylesheetLinks = async (page) => {
-  const isCorrect = await hasElementBySelectors(page, 'link[href*="fonts.css"] ~ link[href*="style.css"]');
+const checkOrderStylesheetLinks = async (page, files) => {
+  const selectors = files.map((file) => `link[href*="${file}"]`).join(' ~ ');
+  const isCorrect = await hasElementBySelectors(page, selectors);
 
   if (!isCorrect) {
     return [{
