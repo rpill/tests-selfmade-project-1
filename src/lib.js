@@ -11,7 +11,6 @@ import {
 } from '@hexlet/immutable-fs-trees';
 import * as csstree from 'css-tree';
 import compareImages from 'resemblejs/compareImages.js';
-import imgbbUploader from 'imgbb-uploader';
 import { getFileData } from './utils.js';
 import {
   hasElementBySelectors,
